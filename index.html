@@ -37,11 +37,29 @@
 </head>
 <body>
   <div><button onclick="executeCommand('audio_mute')">Mute</button></div>
-  <div><button onclick="executeCommand('audio_play')">Play</button></div>
-  <div><button onclick="executeCommand('audio_pause')">Pause</button></div>
-  <div><button onclick="executeCommand('audio_prev')">Prev</button></div>
-  <div><button onclick="executeCommand('audio_next')">Next</button></div>
-  <div><button onclick="executeCommand('audio_vol_down')">Vol -</button></div>
-  <div><button onclick="executeCommand('audio_vol_up')">Vol +</button></div>
+  <video id="player" controls autoplay></video>
+  <button id="capture">Capture</button>
+  <canvas id="canvas" width=320 height=240></canvas>
+  <script>
+    const player = document.getElementById('player');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    const captureButton = document.getElementById('capture');
+
+    const constraints = {
+      video: true,
+    };
+
+    captureButton.addEventListener('click', () => {
+      // Draw the video frame to the canvas.
+      context.drawImage(player, 0, 0, canvas.width, canvas.height);
+    });
+
+    // Attach the video stream to the video element and autoplay.
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then((stream) => {
+        player.srcObject = stream;
+      });
+  </script>
 </body>
 </html>
