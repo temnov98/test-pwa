@@ -22,24 +22,16 @@
       font-size: 70px;
       font-weight: bold;
     }
-  </style>
-  <script>
-    async function executeCommand(command) {
-      try {
-        window.navigator.vibrate(70);
-      } catch (e) {
-        // nothing
-      }    
-  
-      alert(command);
+    body {
+      text-align: center;
     }
-  </script>
+  </style>
 </head>
 <body>
-  <div><button onclick="executeCommand('audio_mute')">Mute</button></div>
   <video id="player" controls autoplay></video>
   <button id="capture">Capture</button>
-  <canvas id="canvas" width=320 height=240></canvas>
+  <canvas id="canvas"></canvas>
+
   <script>
     const player = document.getElementById('player');
     const canvas = document.getElementById('canvas');
