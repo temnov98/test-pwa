@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="manifest" href="manifest.json">
+  <script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        console.log('Registration successful, scope is:', registration.scope);
+      })
+      .catch(function(error) {
+        console.log('Service worker registration failed, error:', error);
+      });
+    }
+  </script>
+  <style>
+    button {
+      width: 100%;
+      color: blue;
+      padding: 60px;
+      font-size: 70px;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    async function executeCommand(command) {
+      try {
+        window.navigator.vibrate(70);
+      } catch (e) {
+        // nothing
+      }    
+  
+      alert(command);
+    }
+  </script>
+</head>
+<body>
+  <div><button onclick="executeCommand('audio_mute')">Mute</button></div>
+  <div><button onclick="executeCommand('audio_play')">Play</button></div>
+  <div><button onclick="executeCommand('audio_pause')">Pause</button></div>
+  <div><button onclick="executeCommand('audio_prev')">Prev</button></div>
+  <div><button onclick="executeCommand('audio_next')">Next</button></div>
+  <div><button onclick="executeCommand('audio_vol_down')">Vol -</button></div>
+  <div><button onclick="executeCommand('audio_vol_up')">Vol +</button></div>
+</body>
+</html>
